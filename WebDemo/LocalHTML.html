@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Local HTML</title>
+        <style>
+            body {
+                background-color: red
+            }
+            .btn1 {
+                display: block;
+                width: 400px;
+                height:100px;
+                font-size: 40px;
+                margin: 10px;
+            }
+        </style>
+        <script>
+            <!--传信息-->
+            function showMessage() {
+                 window.webkit.messageHandlers.iOS.postMessage("信息从web传到app")
+            }
+            <!--弹出确认框-->
+            function showConfirm() {
+                if(confirm("确定?")) {
+                    document.getElementById("message").innerHTML = "确定"
+                }else {
+                    document.getElementById("message").innerHTML = "取消"
+                }
+            }
+            <!--弹出输入框-->
+            function showTextInput() {
+                document.getElementById("message").innerHTML = prompt("请输入")
+            }
+            <!--定义测试方法，由app调用此方法-->
+            function appMethod(str) {
+                document.getElementById("message").innerHTML = str
+                return "app调用web方法返回值"
+            }
+        </script>
+    </head>
+    <body>
+        <button class="btn1" onclick="showMessage()">传消息按钮</button>
+        <button class="btn1" onclick="showConfirm()">弹confirm按钮</button>
+        <button class="btn1" onclick="showTextInput()">弹prompt按钮</button>
+        <h1 id="message">选择</h1>
+    </body>
+</html>
